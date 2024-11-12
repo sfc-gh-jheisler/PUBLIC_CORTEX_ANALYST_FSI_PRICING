@@ -40,3 +40,4 @@ Follow these steps to create our base application: https://docs.snowflake.com/en
 7) In the App location dropdown, select the database and schema for your app.
 8) Select Create.
 9) Delete the python in the editor pane and copy and past the python from sis_application.py.
+10) Click run in top right
