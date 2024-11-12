@@ -9,3 +9,236 @@ CREATE OR REPLACE STAGE STAGE SEMANTIC_MODELS;
 
 -- WAREHOUSE
 CREATE OR REPLACE WAREHOUSE CORTEX_ANALYST_DEMO_WH AUTO_SUSPEND = 60;
+
+--VIEWS
+create or replace view CORTEX_ANALYST_DEMO.PUBLIC.TH_SF_MKTPLACE(
+	TRADE_TIMESTAMP,
+	TICKER,
+	MSG_TYPE,
+	DATE,
+	TIME,
+	SEQUENCE,
+	LAST_PRICE,
+	LAST_VOL,
+	CVOL,
+	VWAP,
+	BID,
+	BID_VOL,
+	BID_EXCH,
+	ASK,
+	ASK_VOL,
+	ASK_EXCH,
+	MID,
+	SECURITY_STATUS,
+	MSG_BITMASK,
+	ORIG_SEQUENCE,
+	TRADE_CONDITION,
+	VENUE,
+	ASK_YIELD,
+	BID_YIELD,
+	BUY_ID,
+	CURRENT_YIELD,
+	MID_YIELD,
+	ORDER_CODE,
+	REPORTING_SIDE,
+	SELL_ID,
+	PRODUCT,
+	MID_TIME,
+	BID_TIME,
+	ASK_TIME,
+	SECURITY_TYPE,
+	YIELD_PRICE,
+	BENCHMARK_YIELD,
+	BENCHMARK_SPREAD,
+	TRADED_PRICE,
+	TRADED_VOL,
+	TRADED_CONDITION,
+	TRADED_YIELD,
+	ISO_CODE,
+	LAST_EXCH,
+	LAST_DATE,
+	LAST_TIME,
+	ORDER_NUM
+) as
+SELECT 
+    TIMESTAMP_FROM_PARTS(
+        SUBSTR(date, 0, 4), -- year
+        SUBSTR(date, 5, 2), -- month
+        SUBSTR(date, 7, 2), -- day 
+        SUBSTR(LPAD(time, 9, 0), 0, 2), -- hour
+        SUBSTR(LPAD(time, 9, 0), 3, 2), -- minute
+        SUBSTR(LPAD(time, 9, 0), 5, 2), -- second
+        RPAD(SUBSTR(LPAD(time, 9, 0), 7, 3), 9, 0) -- nanoseconds
+    ) AS trade_timestamp, *
+FROM 
+    tick_history.public.th_sf_mktplace
+WHERE 
+    1=1 ;
+
+create or replace view CORTEX_ANALYST_DEMO.PUBLIC.TH_SF_MKTPLACE_CURRENT_DAY(
+	TRADE_TIMESTAMP,
+	TICKER,
+	MSG_TYPE,
+	DATE,
+	TIME,
+	SEQUENCE,
+	LAST_PRICE,
+	LAST_VOL,
+	CVOL,
+	VWAP,
+	BID,
+	BID_VOL,
+	BID_EXCH,
+	ASK,
+	ASK_VOL,
+	ASK_EXCH,
+	MID,
+	SECURITY_STATUS,
+	MSG_BITMASK,
+	ORIG_SEQUENCE,
+	TRADE_CONDITION,
+	VENUE,
+	ASK_YIELD,
+	BID_YIELD,
+	BUY_ID,
+	CURRENT_YIELD,
+	MID_YIELD,
+	ORDER_CODE,
+	REPORTING_SIDE,
+	SELL_ID,
+	PRODUCT,
+	MID_TIME,
+	BID_TIME,
+	ASK_TIME,
+	SECURITY_TYPE,
+	YIELD_PRICE,
+	BENCHMARK_YIELD,
+	BENCHMARK_SPREAD,
+	TRADED_PRICE,
+	TRADED_VOL,
+	TRADED_CONDITION,
+	TRADED_YIELD,
+	ISO_CODE,
+	LAST_EXCH,
+	LAST_DATE,
+	LAST_TIME,
+	ORDER_NUM
+) as (
+    select
+        dateadd('years', 2, trade_timestamp) AS TRADE_TIMESTAMP,
+        TICKER,
+        MSG_TYPE,
+        DATE,
+        TIME,
+        SEQUENCE,
+        LAST_PRICE,
+        LAST_VOL,
+        CVOL,
+        VWAP,
+        BID,
+        BID_VOL,
+        BID_EXCH,
+        ASK,
+        ASK_VOL,
+        ASK_EXCH,
+        MID,
+        SECURITY_STATUS,
+        MSG_BITMASK,
+        ORIG_SEQUENCE,
+        TRADE_CONDITION,
+        VENUE,
+        ASK_YIELD,
+        BID_YIELD,
+        BUY_ID,
+        CURRENT_YIELD,
+        MID_YIELD,
+        ORDER_CODE,
+        REPORTING_SIDE,
+        SELL_ID,
+        PRODUCT,
+        MID_TIME,
+        BID_TIME,
+        ASK_TIME,
+        SECURITY_TYPE,
+        YIELD_PRICE,
+        BENCHMARK_YIELD,
+        BENCHMARK_SPREAD,
+        TRADED_PRICE,
+        TRADED_VOL,
+        TRADED_CONDITION,
+        TRADED_YIELD,
+        ISO_CODE,
+        LAST_EXCH,
+        LAST_DATE,
+        LAST_TIME,
+        ORDER_NUM
+    from
+        CORTEX_ANALYST_DEMO.PUBLIC.TH_SF_MKTPLACE
+    where
+        TRADE_TIMESTAMP <= current_timestamp
+);
+
+create or replace view CORTEX_ANALYST_DEMO.PUBLIC.TH_SF_MKTPLACE_VIEW(
+	TRADE_TIMESTAMP,
+	TICKER,
+	MSG_TYPE,
+	DATE,
+	TIME,
+	SEQUENCE,
+	LAST_PRICE,
+	LAST_VOL,
+	CVOL,
+	VWAP,
+	BID,
+	BID_VOL,
+	BID_EXCH,
+	ASK,
+	ASK_VOL,
+	ASK_EXCH,
+	MID,
+	SECURITY_STATUS,
+	MSG_BITMASK,
+	ORIG_SEQUENCE,
+	TRADE_CONDITION,
+	VENUE,
+	ASK_YIELD,
+	BID_YIELD,
+	BUY_ID,
+	CURRENT_YIELD,
+	MID_YIELD,
+	ORDER_CODE,
+	REPORTING_SIDE,
+	SELL_ID,
+	PRODUCT,
+	MID_TIME,
+	BID_TIME,
+	ASK_TIME,
+	SECURITY_TYPE,
+	YIELD_PRICE,
+	BENCHMARK_YIELD,
+	BENCHMARK_SPREAD,
+	TRADED_PRICE,
+	TRADED_VOL,
+	TRADED_CONDITION,
+	TRADED_YIELD,
+	ISO_CODE,
+	LAST_EXCH,
+	LAST_DATE,
+	LAST_TIME,
+	ORDER_NUM
+) as
+SELECT 
+    TIMESTAMP_FROM_PARTS(
+        SUBSTR(date, 0, 4), -- year
+        SUBSTR(date, 5, 2), -- month
+        SUBSTR(date, 7, 2), -- day 
+        SUBSTR(LPAD(time, 9, 0), 0, 2), -- hour
+        SUBSTR(LPAD(time, 9, 0), 3, 2), -- minute
+        SUBSTR(LPAD(time, 9, 0), 5, 2), -- second
+        RPAD(SUBSTR(LPAD(time, 9, 0), 7, 3), 9, 0) -- nanoseconds
+    ) AS trade_timestamp, *
+FROM 
+    tick_history.public.th_sf_mktplace
+WHERE 
+    1=1 
+;
