@@ -1,6 +1,19 @@
 # PUBLIC_CORTEX_ANALYST_FSI_PRICING
 PUBLIC_CORTEX_ANALYST_FSI_PRICING
 
+## Access Data from Snowflake Marketplace
+Follow below instructions to get the FactSet Tick History data from Snowflake Marketplace.
+
+1) Navigate to Snowsight
+2) Click: Data Products
+3) Click: Marketplace
+4) Search: FactSet Tick History
+5) Scroll Down and Click: Tick History
+6) Click: Get
+7) Make sure the Database name is: tick_history
+8) Which roles, in addition to ACCOUNTADMIN, can access this database? PUBLIC
+9) Click: Get
+
 ## Set Up Environment
 run the SET_UP_SQL.sql script to create the objects necessary for our demo.
 
@@ -14,19 +27,6 @@ Upload the th_sf_mktplace.yaml file to the stage following these steps: https://
 5) Select the database schema in which you created the stage, then select the stage.
 6) Optionally, select or create a path where you want to save your files within the stage.
 7) Select Upload.
-
-## Access Data from Snowflake Marketplace
-Follow below instructions to get the FactSet Tick History data from Snowflake Marketplace.
-
-1) Navigate to Snowsight
-2) Click: Data Products
-3) Click: Marketplace
-4) Search: FactSet Tick History
-5) Scroll Down and Click: Tick History
-6) Click: Get
-7) Make sure the Database name is: tick_history
-8) Which roles, in addition to ACCOUNTADMIN, can access this database? PUBLIC
-9) Click: Get
 
 ## Create a Streamlit Application
 Follow these steps to create our base application: https://docs.snowflake.com/en/developer-guide/streamlit/create-streamlit-ui#create-a-streamlit-app-by-using-sf-web-interface
