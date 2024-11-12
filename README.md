@@ -1,7 +1,7 @@
 # PUBLIC_CORTEX_ANALYST_FSI_PRICING
 PUBLIC_CORTEX_ANALYST_FSI_PRICING
 
-##Access Data from Snowflake Marketplace
+## Access Data from Snowflake Marketplace
 Follow below instructions to get the FactSet Tick History data from Snowflake Marketplace.
 
 1) Navigate to Snowsight
