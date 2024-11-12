@@ -24,7 +24,7 @@ Follow below instructions to get the FactSet Tick History data from Snowflake Ma
 4) Search: FactSet Tick History
 5) Scroll Down and Click: Tick History
 6) Click: Get
-7) Make sure the Database name is: CORTEX_ANALYST_DEMO
+7) Make sure the Database name is: tick_history
 8) Which roles, in addition to ACCOUNTADMIN, can access this database? PUBLIC
 9) Click: Get
 
